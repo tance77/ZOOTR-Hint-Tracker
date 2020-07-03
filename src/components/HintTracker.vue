@@ -252,7 +252,7 @@
             },
             miscLocations: {
                 deep: true,
-                handler(newMiscLocation) {
+                handler() {
                     localStorage.miscLocations = JSON.stringify(this.miscLocations);
                 },
             },

@@ -18,10 +18,6 @@ module.exports = {
                     borderWidth: "1px",
                     backgroundColor: theme("colors.white"),
                 },
-                "&:disabled": {
-                    backgroundColor: theme("colors.gray.100"),
-                    opacity: 0.4,
-                },
             },
 
             checkbox: {

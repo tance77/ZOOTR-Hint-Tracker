@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto">
+    <div>
         <h2 class="mt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
             Ocarina of Time Hint Tracker
         </h2>

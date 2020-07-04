@@ -74,16 +74,16 @@
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-700 bg-gray-800">
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase border-b border-gray-700 bg-gray-800">
                                         Hints
                                     </th>
-                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-700 lg:table-cell bg-gray-800">
+                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase border-b border-gray-700 lg:table-cell bg-gray-800">
                                         Dead
                                     </th>
-                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-700 lg:table-cell bg-gray-800">
+                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase border-b border-gray-700 lg:table-cell bg-gray-800">
                                         Required
                                     </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-700 bg-gray-800">
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase border-b border-gray-700 bg-gray-800">
                                         Notes
                                     </th>
                                 </tr>
@@ -323,6 +323,12 @@
                     location.reward = null;
                     return location;
                 });
+                this.miscLocations = this.miscLocations.map(location => {
+                    location.dead = false;
+                    location.required = false;
+                    location.notes = false;
+                    return location;
+                })
                 this.resetModal = false;
             },
         },

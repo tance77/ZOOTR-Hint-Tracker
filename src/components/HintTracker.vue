@@ -44,7 +44,7 @@
                             <div class="grid gap-2 gird-cols-1 lg:grid-cols-2 mt-2">
                                 <div class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Way of The Hero Locations</span>
-                                    <label v-for="option in selectedWayOfHero" :key="option.id">
+                                    <label v-for="option in sortedWayOfTheHero" :key="option.id">
                                         <input type="text" class="w-full mt-2 form-input bg-green-900 border-green-900 text-green-50" :value="option.name" disabled>
                                     </label>
                                 </div>

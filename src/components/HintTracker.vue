@@ -326,7 +326,7 @@
                 this.miscLocations = this.miscLocations.map(location => {
                     location.dead = false;
                     location.required = false;
-                    location.notes = false;
+                    location.notes = null;
                     return location;
                 })
                 this.resetModal = false;

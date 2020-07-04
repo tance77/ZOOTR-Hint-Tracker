@@ -14,7 +14,7 @@
                         </div>
                         <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out form-checkbox bg-gray-900 border-gray-900" :value="location">
+                                <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out form-checkbox bg-gray-900 border-gray-700" :value="location">
                                 <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                             </label>
                         </div>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-600 transition duration-150 ease-in-out form-checkbox bg-gray-900 border-gray-900" :value="location">
+                                <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-600 transition duration-150 ease-in-out form-checkbox bg-gray-900 border-gray-700" :value="location">
                                 <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                             </label>
                         </div>
@@ -51,7 +51,7 @@
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Rewards</span>
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input v-model="option.reward" type="text" class="w-full mt-2 form-input bg-gray-900 border-gray-900 text-gray-300">
+                                        <input v-model="option.reward" type="text" class="w-full mt-2 form-input bg-gray-900 border-gray-700 text-gray-300">
                                     </label>
                                 </label>
                             </div>
@@ -64,7 +64,7 @@
                                 </label>
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Extra Notes</span>
-                                    <textarea v-model="extraNotes" class="mt-2 w-full resize-none form-textarea bg-gray-900 border-gray-900 text-gray-300" rows="8"/>
+                                    <textarea v-model="extraNotes" class="mt-2 w-full resize-none form-textarea bg-gray-900 border-gray-700 text-gray-300" rows="8"/>
                                 </label>
                             </div>
                         </div>
@@ -92,29 +92,29 @@
                                 <tr v-for="location in miscLocations" :key="location.id">
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-100 whitespace-no-wrap">
                                         {{ location.name }}
-                                        <label class="flex grid items-center grid-cols-2 gap-6 lg:hidden">
-                                            <span class="font-normal text-gray-500">Dead</span>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-red-600 form-checkbox bg-gray-900 border-gray-900">
+                                        <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
+                                            <span class="font-normal text-gray-300">Dead</span>
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-red-600 form-checkbox bg-gray-900 border-gray-700 text-lg">
                                         </label>
 
-                                        <label class="flex grid items-center grid-cols-2 gap-6 lg:hidden">
-                                            <span class="font-normal text-gray-500">Required</span>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-green-600 form-checkbox bg-gray-900 border-gray-900">
+                                        <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
+                                            <span class="font-normal text-gray-300">Required</span>
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-green-600 form-checkbox bg-gray-900 border-gray-700 text-lg">
                                         </label>
                                     </td>
                                     <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-600 form-checkbox bg-gray-900 border-gray-900">
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-600 form-checkbox bg-gray-900 border-gray-700">
                                         </label>
                                     </td>
                                     <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-xl text-green-600 form-checkbox bg-gray-900 border-gray-900">
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-xl text-green-600 form-checkbox bg-gray-900 border-gray-700">
                                         </label>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full form-input form-input-sm bg-gray-900 border-gray-900 text-gray-300">
+                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full form-input form-input-sm bg-gray-900 border-gray-700 text-gray-300">
                                         </label>
                                     </td>
                                 </tr>

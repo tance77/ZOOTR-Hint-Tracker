@@ -4,7 +4,7 @@
             Ocarina of Time Hint Tracker
         </h2>
         <div class="mt-4">
-            <div class="grid grid-cols-1 gap-4 px-4 sm:grid-cols-5">
+            <div class="grid grid-cols-1 px-4 sm:gap-4 sm:grid-cols-5">
                 <div class="col-span-3">
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
                         <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
@@ -14,7 +14,7 @@
                         </div>
                         <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out form-checkbox bg-gray-900 border-gray-700" :value="location">
+                                <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-gray-700 form-checkbox" :value="location">
                                 <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                             </label>
                         </div>
@@ -27,31 +27,31 @@
                         </div>
                         <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-600 transition duration-150 ease-in-out form-checkbox bg-gray-900 border-gray-700" :value="location">
+                                <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-600 transition duration-150 ease-in-out bg-gray-900 border-gray-700 form-checkbox" :value="location">
                                 <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 mt-2 sm:mt-0">
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
                         <div class="px-4 py-5 sm:p-6">
                             <div class="text-right">
-                                <button type="button" class="lg:inline-flex w-full lg:w-auto text-center lg:text-left items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150" @click.stop.prevent="resetModal = true">
+                                <button type="button" class="items-center w-full px-4 py-2 text-sm font-medium leading-5 text-center text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md lg:inline-flex lg:w-auto lg:text-left hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700" @click.stop.prevent="resetModal = true">
                                     Reset
                                 </button>
                             </div>
-                            <div class="grid gap-2 gird-cols-1 lg:grid-cols-2 mt-2">
+                            <div class="grid gap-2 mt-2 gird-cols-1 lg:grid-cols-2">
                                 <div class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Way of The Hero Locations</span>
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input type="text" class="w-full mt-2 form-input bg-green-900 border-green-900 text-green-50" :value="option.name" disabled>
+                                        <input type="text" class="w-full mt-2 bg-green-900 border-green-900 form-input text-green-50" :value="option.name" disabled>
                                     </label>
                                 </div>
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Rewards</span>
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input v-model="option.reward" type="text" class="w-full mt-2 form-input bg-gray-900 border-gray-700 text-gray-300">
+                                        <input v-model="option.reward" type="text" class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 form-input focus:outline-none focus:shadow-none">
                                     </label>
                                 </label>
                             </div>
@@ -59,12 +59,12 @@
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Foolish Locations</span>
                                     <label v-for="option in sortedFoolish" :key="option.id">
-                                        <input type="text" class="w-full mt-2 form-input bg-red-900 border-red-900 text-red-50" :value="option.name" disabled>
+                                        <input type="text" class="w-full mt-2 bg-red-900 border-red-900 form-input text-red-50" :value="option.name" disabled>
                                     </label>
                                 </label>
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Extra Notes</span>
-                                    <textarea v-model="extraNotes" class="mt-2 w-full resize-none form-textarea bg-gray-900 border-gray-700 text-gray-300" rows="8"/>
+                                    <textarea v-model="extraNotes" class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 resize-none form-textarea focus:outline-none focus:shadow-none" rows="8"/>
                                 </label>
                             </div>
                         </div>
@@ -74,16 +74,16 @@
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase border-b border-gray-700 bg-gray-800">
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
                                         Hints
                                     </th>
-                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase border-b border-gray-700 lg:table-cell bg-gray-800">
+                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700 lg:table-cell">
                                         Dead
                                     </th>
-                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase border-b border-gray-700 lg:table-cell bg-gray-800">
+                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700 lg:table-cell">
                                         Required
                                     </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase border-b border-gray-700 bg-gray-800">
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
                                         Notes
                                     </th>
                                 </tr>
@@ -94,35 +94,36 @@
                                         {{ location.name }}
                                         <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
                                             <span class="font-normal text-gray-300">Dead</span>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-red-600 form-checkbox bg-gray-900 border-gray-700 text-lg">
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-lg text-red-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
                                         </label>
 
                                         <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
                                             <span class="font-normal text-gray-300">Required</span>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-green-600 form-checkbox bg-gray-900 border-gray-700 text-lg">
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-lg text-green-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleRequired(location)">
                                         </label>
                                     </td>
                                     <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-600 form-checkbox bg-gray-900 border-gray-700">
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
                                         </label>
                                     </td>
                                     <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-xl text-green-600 form-checkbox bg-gray-900 border-gray-700">
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-xl text-green-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleRequired(location)">
                                         </label>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full form-input form-input-sm bg-gray-900 border-gray-700 text-gray-300">
+                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
                                         </label>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="block mb-2 text-center sm:hidden px-4">
-                        <button type="button" class="w-full px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150" @click.stop.prevent="resetModal = true">
+
+                    <div class="block mt-4 mb-2 text-center sm:hidden">
+                        <button type="button" class="w-full px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700" @click.stop.prevent="resetModal = true">
                             Reset
                         </button>
                     </div>
@@ -189,6 +190,7 @@
 </template>
 
 <script>
+
     export default {
         name: "HintTracker",
         data() {
@@ -197,6 +199,17 @@
                 extraNotes: null,
                 selectedWayOfHero: [],
                 selectedFoolish: [],
+                nonModifiedMiscLocations: [
+                    {id: 1, dead: false, required: false, notes: null, name: "10 Skulltulas"},
+                    {id: 2, dead: false, required: false, notes: null, name: "20 Skulltulas"},
+                    {id: 3, dead: false, required: false, notes: null, name: "30 Skulltulas"},
+                    {id: 4, dead: false, required: false, notes: null, name: "40 Skulltulas"},
+                    {id: 5, dead: false, required: false, notes: null, name: "50 Skulltulas"},
+                    {id: 6, dead: false, required: false, notes: null, name: "Biggoron Sword"},
+                    {id: 7, dead: false, required: false, notes: null, name: "Frog a Ocarina"},
+                    {id: 8, dead: false, required: false, notes: null, name: "Skull Mask"},
+                    {id: 9, dead: false, required: false, notes: null, name: "Ocarina of Time"},
+                ],
                 miscLocations: [
                     {id: 1, dead: false, required: false, notes: null, name: "10 Skulltulas"},
                     {id: 2, dead: false, required: false, notes: null, name: "20 Skulltulas"},
@@ -207,6 +220,42 @@
                     {id: 7, dead: false, required: false, notes: null, name: "Frog a Ocarina"},
                     {id: 8, dead: false, required: false, notes: null, name: "Skull Mask"},
                     {id: 9, dead: false, required: false, notes: null, name: "Ocarina of Time"},
+                ],
+                nonModifiedLocations: [
+                    {id: 1, reward: null, name: "Bottom of the Well"},
+                    {id: 2, reward: null, name: "Death Mountain Crater"},
+                    {id: 3, reward: null, name: "Death Mountain Trail"},
+                    {id: 4, reward: null, name: "Deku Tree"},
+                    {id: 5, reward: null, name: "Desert Colossus"},
+                    {id: 6, reward: null, name: "Dodongo's Cavern"},
+                    {id: 7, reward: null, name: "Fire Temple"},
+                    {id: 8, reward: null, name: "Forest Temple"},
+                    {id: 9, reward: null, name: "Ganon's Castle"},
+                    {id: 10, reward: null, name: "Geurdo's Fortress"},
+                    {id: 11, reward: null, name: "Geurdo Training Grounds"},
+                    {id: 12, reward: null, name: "Guerdo Valley"},
+                    {id: 13, reward: null, name: "Goron City"},
+                    {id: 14, reward: null, name: "Graveyard"},
+                    {id: 15, reward: null, name: "Haunted Wasteland"},
+                    {id: 16, reward: null, name: "Hyrule Castle"},
+                    {id: 17, reward: null, name: "Hyrule Field"},
+                    {id: 18, reward: null, name: "Ice Cavern"},
+                    {id: 19, reward: null, name: "Jabu Jabu's Belly"},
+                    {id: 20, reward: null, name: "Kakariko Village"},
+                    {id: 21, reward: null, name: "Kokiri Forest"},
+                    {id: 22, reward: null, name: "Lake Hylia"},
+                    {id: 23, reward: null, name: "Lon Lon Ranch"},
+                    {id: 24, reward: null, name: "Lost Woods"},
+                    {id: 25, reward: null, name: "Market"},
+                    {id: 26, reward: null, name: "Outside Ganon's Castle"},
+                    {id: 27, reward: null, name: "Sacred Forest Meadow"},
+                    {id: 28, reward: null, name: "Shadow Temple"},
+                    {id: 29, reward: null, name: "Spirit Temple"},
+                    {id: 30, reward: null, name: "Temple of Time"},
+                    {id: 31, reward: null, name: "Water Temple"},
+                    {id: 32, reward: null, name: "Zora's Domain"},
+                    {id: 33, reward: null, name: "Zora's Fountain"},
+                    {id: 34, reward: null, name: "Zora's River"},
                 ],
                 locations: [
                     {id: 1, reward: null, name: "Bottom of the Well"},
@@ -244,6 +293,70 @@
                     {id: 33, reward: null, name: "Zora's Fountain"},
                     {id: 34, reward: null, name: "Zora's River"},
                 ],
+                rewards: [
+                    "Arrows",
+                    "Biggoron Sword",
+                    "Bolero of Fire",
+                    "Bomb Bag",
+                    "Bombchus",
+                    "Bombs",
+                    "Boomerang",
+                    "Bottle with Blue Potion",
+                    "Bottle with Fairy",
+                    "Bottle with Green Potion",
+                    "Bottle with Letter",
+                    "Bow",
+                    "Deku Nut Capacity",
+                    "Deku Nuts",
+                    "Deku Seeds",
+                    "Deku Shield",
+                    "Deku Stick",
+                    "Deku Stick Capacity",
+                    "Dins Fire",
+                    "Double Defense",
+                    "Eponas Song",
+                    "Farores Wind",
+                    "Fire Arrows",
+                    "Goron Tunic",
+                    "Hammer",
+                    "Heart Container",
+                    "Hover Boots",
+                    "Hylian Shield",
+                    "Ice Arrows",
+                    "Ice Trap",
+                    "Iron Boots",
+                    "Kokiri Sword",
+                    "Lens of Truth",
+                    "Light Arrows",
+                    "Magic Meter",
+                    "Minuet of Forest",
+                    "Mirror Shield",
+                    "Nayrus Love",
+                    "Nocturne of Shadow",
+                    "Piece of Heart",
+                    "Prelude of Light",
+                    "Prescription",
+                    "Hookshot",
+                    "Scale",
+                    "Strength",
+                    "Wallet",
+                    "Recovery Heart",
+                    "Requiem of Spirit",
+                    "Rupee (1)",
+                    "Rupees (20)",
+                    "Rupees (200)",
+                    "Rupees (5)",
+                    "Rupees (50)",
+                    "Sarias Song",
+                    "Serenade of Water",
+                    "Slingshot",
+                    "Song of Storms",
+                    "Song of Time",
+                    "Stone of Agony",
+                    "Suns Song",
+                    "Zeldas Lullaby",
+                    "Zora Tunic",
+                ],
             };
         },
         computed: {
@@ -254,13 +367,13 @@
                 });
                 return data;
             },
-            sortedFoolish(){
+            sortedFoolish() {
                 let data = JSON.parse(JSON.stringify(this.selectedFoolish));
                 data.sort((a, b) => {
                     return a.id > b.id ? 1 : -1;
                 });
                 return data;
-            }
+            },
         },
         watch: {
             extraNotes() {
@@ -314,21 +427,31 @@
 
         },
         methods: {
+            toggleDead(location) {
+                if (location.dead === false) {
+                    location.dead = true;
+                    location.required = false;
+                } else {
+                    location.dead = false;
+                }
+                this.miscLocations[location.id - 1] = location;
+            },
+            toggleRequired(location) {
+                if (location.required === false) {
+                    location.required = true;
+                    location.dead = false;
+                } else {
+                    location.required = false;
+                }
+                this.miscLocations[location.id - 1] = location;
+            },
             reset() {
                 localStorage.clear();
                 this.selectedFoolish = [];
                 this.selectedWayOfHero = [];
                 this.extraNotes = null;
-                this.locations = this.locations.map(location => {
-                    location.reward = null;
-                    return location;
-                });
-                this.miscLocations = this.miscLocations.map(location => {
-                    location.dead = false;
-                    location.required = false;
-                    location.notes = null;
-                    return location;
-                })
+                this.locations = this.nonModifiedLocations;
+                this.miscLocations = this.nonModifiedMiscLocations;
                 this.resetModal = false;
             },
         },

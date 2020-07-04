@@ -4,29 +4,23 @@ module.exports = {
         './src/**/*.vue',
         './src/**/*.jsx',
     ],
-    theme: {},
-    customForms: theme => ({
-        default: {
-            "input, select, textarea": {
-                backgroundColor: theme("colors.gray.50"),
-                borderRadius: ".5rem",
-                borderWidth: "1px",
-                borderColor: theme("colors.gray.300"),
-
-                "&:focus": {
-                    boxShadow: theme("boxShadow.md"),
-                    borderWidth: "1px",
-                    backgroundColor: theme("colors.white"),
+    theme: {
+        customForms: theme => ({
+            sm: {
+                'input, textarea, multiselect, select': {
+                    fontSize: theme('fontSize.sm'),
+                    padding: `${theme('spacing.1')} ${theme('spacing.2')}`,
+                },
+                select: {
+                    paddingRight: `${theme('spacing.4')}`,
+                },
+                'checkbox, radio': {
+                    width: theme('spacing.3'),
+                    height: theme('spacing.3'),
                 },
             },
-
-            checkbox: {
-                "&:focus": {
-                    boxShadow: undefined,
-                },
-            },
-        },
-    }),
+        }),
+    },
     variants: {},
     plugins: [
         require("@tailwindcss/ui"),

@@ -1,15 +1,10 @@
 <template>
     <div>
-        <h2 class="mt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
+        <h2 class="px-4 mt-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
             Ocarina of Time Hint Tracker
         </h2>
         <div class="mt-4">
-            <div class="block mb-2 text-center sm:hidden">
-                <button type="button" class="items-center w-full px-4 py-2 text-sm font-medium leading-5 text-red-700 transition duration-150 ease-in-out bg-red-100 border border-transparent rounded-md hover:bg-red-50 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:bg-red-200" @click.stop.prevent="resetModal = true">
-                    Reset
-                </button>
-            </div>
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-5">
+            <div class="grid grid-cols-1 gap-4 px-4 sm:grid-cols-5">
                 <div class="col-span-3">
                     <div class="overflow-hidden bg-white rounded-lg shadow">
                         <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
@@ -17,9 +12,9 @@
                                 Way of the Hero
                             </h3>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 px-4 py-5 lg:grid-cols-3 sm:p-6">
+                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedWayOfHero" type="checkbox" class="text-green-500 transition duration-150 ease-in-out form-checkbox" :value="location">
+                                <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-500 transition duration-150 ease-in-out form-checkbox" :value="location">
                                 <span class="ml-2 text-sm text-gray-700">{{ location.name }}</span>
                             </label>
                         </div>
@@ -30,9 +25,9 @@
                                 Foolish Choice
                             </h3>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 px-4 py-5 lg:grid-cols-3 sm:p-6">
+                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedFoolish" type="checkbox" class="text-red-500 transition duration-150 ease-in-out form-checkbox" :value="location">
+                                <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-500 transition duration-150 ease-in-out form-checkbox" :value="location">
                                 <span class="ml-2 text-sm text-gray-700">{{ location.name }}</span>
                             </label>
                         </div>
@@ -42,29 +37,29 @@
                     <div class="overflow-hidden bg-white rounded-lg shadow">
                         <div class="px-4 py-5 sm:p-6">
                             <div class="text-right">
-                                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-red-700 transition duration-150 ease-in-out bg-red-100 border border-transparent rounded-md hover:bg-red-50 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:bg-red-200" @click.stop.prevent="resetModal = true">
+                                <button type="button" class="lg:inline-flex w-full lg:w-auto text-center lg:text-left items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150" @click.stop.prevent="resetModal = true">
                                     Reset
                                 </button>
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid gap-2 gird-cols-1 lg:grid-cols-2 mt-2">
                                 <div class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-700">WOTH Locations</span>
                                     <label v-for="option in selectedWayOfHero" :key="option.id">
-                                        <input type="text" class="w-full mt-2 form-input bg-green-100" :value="option.name" disabled>
+                                        <input type="text" class="w-full mt-2 form-input bg-green-50 border-green-50" :value="option.name" disabled>
                                     </label>
                                 </div>
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-700">Rewards</span>
-                                    <label v-for="option in selectedWayOfHero" :key="option.id">
+                                    <label v-for="option in sortedWayOfTheHero" :key="option.id">
                                         <input v-model="option.reward" type="text" class="w-full mt-2 form-input">
                                     </label>
                                 </label>
                             </div>
-                            <div class="grid grid-cols-2 gap-2 mt-4">
+                            <div class="grid gap-2 mt-4 gird-cols-1 lg:grid-cols-2">
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-700">Foolish Locations</span>
-                                    <label v-for="option in selectedFoolish" :key="option.id">
-                                        <input type="text" class="w-full mt-2 form-input bg-red-50" :value="option.name" disabled>
+                                    <label v-for="option in sortedFoolish" :key="option.id">
+                                        <input type="text" class="w-full mt-2 form-input bg-red-50 border-red-50" :value="option.name" disabled>
                                     </label>
                                 </label>
                                 <label class="col-span-1">
@@ -82,10 +77,10 @@
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         Hints
                                     </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 lg:table-cell bg-gray-50">
                                         Dead
                                     </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 lg:table-cell bg-gray-50">
                                         Required
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -95,21 +90,41 @@
                             </thead>
                             <tbody>
                                 <tr v-for="location in miscLocations" :key="location.id">
-                                    <td class="text-sm text-gray-900">
+                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
                                         {{ location.name }}
+                                        <label class="flex grid items-center grid-cols-2 gap-6 lg:hidden">
+                                            <span class="font-normal text-gray-500">Dead</span>
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-red-500 form-checkbox">
+                                        </label>
+
+                                        <label class="flex grid items-center grid-cols-2 gap-6 lg:hidden">
+                                            <span class="font-normal text-gray-500">Required</span>
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-green-500 form-checkbox">
+                                        </label>
                                     </td>
-                                    <td class="text-center text-gray-500">
-                                        <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-red-500 border-red-300 form-checkbox">
+                                    <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
+                                        <label>
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-500 form-checkbox">
+                                        </label>
                                     </td>
-                                    <td class="text-center text-gray-500">
-                                        <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-green-500 border-green-200 form-checkbox">
+                                    <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
+                                        <label>
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-xl text-green-500 form-checkbox">
+                                        </label>
                                     </td>
-                                    <td class="text-gray-500">
-                                        <input v-model="miscLocations[location.id-1].notes" type="text" class="form-input">
+                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
+                                        <label>
+                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full form-input form-input-sm">
+                                        </label>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="block mb-2 text-center sm:hidden px-4">
+                        <button type="button" class="w-full px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150" @click.stop.prevent="resetModal = true">
+                            Reset
+                        </button>
                     </div>
                 </div>
             </div>
@@ -230,6 +245,22 @@
                     {id: 34, reward: null, name: "Zora's River"},
                 ],
             };
+        },
+        computed: {
+            sortedWayOfTheHero() {
+                let data = JSON.parse(JSON.stringify(this.selectedWayOfHero));
+                data.sort((a, b) => {
+                    return a.id > b.id ? 1 : -1;
+                });
+                return data;
+            },
+            sortedFoolish(){
+                let data = JSON.parse(JSON.stringify(this.selectedFoolish));
+                data.sort((a, b) => {
+                    return a.id > b.id ? 1 : -1;
+                });
+                return data;
+            }
         },
         watch: {
             extraNotes() {

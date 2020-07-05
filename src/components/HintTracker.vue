@@ -475,6 +475,7 @@
                 this.selectedWayOfHero = [];
                 this.extraNotes = null;
                 this.locations = this.nonModifiedLocations;
+                this.miscLocations = [];
                 this.miscLocations = this.nonModifiedMiscLocations;
                 this.resetModal = false;
             },

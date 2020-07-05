@@ -1,15 +1,16 @@
 module.exports = {
-    module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'sass-loader',
-                    },
-                ]
-            }
-        ]
-    }
-}
+    devServer: {
+        open: true,
+    },
+    rules: [
+        {
+            test: /\.scss$/,
+            exclude: /node_modules/,
+            use: [
+                {
+                    loader: "sass-loader",
+                },
+            ],
+        },
+    ],
+};

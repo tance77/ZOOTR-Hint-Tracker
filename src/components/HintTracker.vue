@@ -8,28 +8,34 @@
                 <div class="col-span-3">
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
                         <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
-                            <h3 class="text-lg font-medium leading-6 text-gray-100">
-                                Way of the Hero
-                            </h3>
+                            <div class="flex items-center">
+                                <h3 class="flex-1 text-lg font-medium leading-6 text-gray-100">
+                                    Hints
+                                </h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label class="flex items-center w-full justify-end">
+                                        <input type="checkbox" class="text-2xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
+                                        <span class="ml-2 text-gray-300 font-medium">Way of the Hero</span>
+                                    </label>
+                                    <label class="flex items-center w-full justify-end">
+                                        <input type="checkbox" class="text-2xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
+                                        <span class="ml-2 mr-2 text-gray-300 font-medium">Foolish</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
-                            <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-gray-700 form-checkbox" :value="location">
+                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-2 sm:p-6">
+                            <div v-for="location in locations" :key="location.id" class="flex items-center">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label>
+                                        <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" :value="location" @click="toggleWoth(location, true)">
+                                    </label>
+                                    <label>
+                                        <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-red-600 form-checkbox" :value="location" @click="toggleWoth(location, false)">
+                                    </label>
+                                </div>
                                 <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mt-4 overflow-hidden bg-gray-800 rounded-lg shadow">
-                        <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
-                            <h3 class="text-lg font-medium leading-6 text-gray-100">
-                                Foolish Choice
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
-                            <label v-for="location in locations" :key="location.id" class="flex items-center">
-                                <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-600 transition duration-150 ease-in-out bg-gray-900 border-gray-700 form-checkbox" :value="location">
-                                <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
-                            </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +100,7 @@
                                         {{ location.name }}
                                         <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
                                             <span class="font-normal text-gray-300">Dead</span>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-lg text-red-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-lg text-red-800 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
                                         </label>
 
                                         <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
@@ -104,7 +110,7 @@
                                     </td>
                                     <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-800 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
                                         </label>
                                     </td>
                                     <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
@@ -155,7 +161,7 @@
                     <div class="px-4 pt-5 pb-4 overflow-hidden transition-all transform bg-white rounded-lg shadow-xl sm:max-w-lg sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                         <div class="sm:flex sm:items-start">
                             <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10">
-                                <svg class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="w-6 h-6 text-red-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                                 </svg>
                             </div>
@@ -427,6 +433,24 @@
 
         },
         methods: {
+            toggleWoth(location, flag){
+                if(flag === true){
+                    //woth true remove it from foolish
+                    this.selectedFoolish = this.selectedFoolish.filter(foolishLocation=>{
+                        if (foolishLocation.id !== location.id) {
+                            return foolishLocation;
+                        }
+                    })
+                }
+                if(flag === false){
+                    //foolish remove it from woth
+                    this.selectedWayOfHero = this.selectedWayOfHero.filter(wothLocation => {
+                        if(wothLocation.id !== location.id){
+                            return wothLocation;
+                        }
+                    })
+                }
+            },
             toggleDead(location) {
                 if (location.dead === false) {
                     location.dead = true;

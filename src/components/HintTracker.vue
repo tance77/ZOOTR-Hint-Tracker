@@ -10,7 +10,7 @@
                         <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
                             <div class="flex items-center">
                                 <h3 class="flex-1 text-lg font-medium leading-6 text-gray-100">
-                                    Hints
+                                    Way of the Hero / Foolish
                                 </h3>
                                 <div class="grid grid-cols-2 gap-2">
                                     <label class="flex items-center w-full justify-end">

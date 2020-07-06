@@ -57,7 +57,10 @@
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Rewards</span>
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input v-model="option.reward" type="text" class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 form-input focus:outline-none focus:shadow-none">
+                                        <input
+                                            v-for="aOption in selectedWayOfHero" v-if="option.id === aOption.id" :key="aOption.id" v-model="aOption.reward" type="text"
+                                            class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 form-input focus:outline-none focus:shadow-none"
+                                        >
                                     </label>
                                 </label>
                             </div>

@@ -6,9 +6,15 @@ module.exports = {
     ],
     theme: {
         customForms: theme => ({
+            default:{
+                'input, textarea, multiselect, select': {
+                    borderWidth: theme('borderWidth.2'),
+                },
+            },
             sm: {
                 'input, textarea, multiselect, select': {
                     fontSize: theme('fontSize.sm'),
+                    borderWidth: theme('borderWidth.2'),
                     padding: `${theme('spacing.1')} ${theme('spacing.2')}`,
                 },
                 select: {

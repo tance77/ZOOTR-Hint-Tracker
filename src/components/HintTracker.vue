@@ -13,28 +13,31 @@
                                     Way of the Hero / Foolish
                                 </h3>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <label class="flex items-center w-full justify-end">
+                                    <label class="flex items-center justify-end w-full">
                                         <input type="checkbox" class="text-2xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 text-gray-300 font-medium">Way of the Hero</span>
+                                        <span class="ml-2 font-medium text-gray-300">Way of the Hero</span>
                                     </label>
-                                    <label class="flex items-center w-full justify-end">
+                                    <label class="flex items-center justify-end w-full">
                                         <input type="checkbox" class="text-2xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 mr-2 text-gray-300 font-medium">Foolish</span>
+                                        <span class="ml-2 mr-2 font-medium text-gray-300">Foolish</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-2 sm:p-6">
-                            <div v-for="location in locations" :key="location.id" class="flex items-center">
-                                <div class="grid grid-cols-2 gap-2">
-                                    <label>
-                                        <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" :value="location" @click="toggleWoth(location, true)">
-                                    </label>
-                                    <label>
-                                        <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-red-600 form-checkbox" :value="location" @click="toggleWoth(location, false)">
-                                    </label>
+                        <div class="grid grid-cols-2 gap-4 px-4 py-5 lg:grid-cols-3 xl:grid-cols-4 sm:p-6">
+                            <div v-for="(locations, key) in groupLocations" :key="key">
+                                <h2 class="mb-2 text-2xl text-gray-300 border-b border-gray-600">{{key}}</h2>
+                                <div v-for="location in locations" :key="location.id" class="flex items-center">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <label>
+                                            <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" :value="location" @click="toggleWoth(location, true)">
+                                        </label>
+                                        <label>
+                                            <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-red-600 form-checkbox" :value="location" @click="toggleWoth(location, false)">
+                                        </label>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                                 </div>
-                                <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                             </div>
                         </div>
                     </div>
@@ -199,6 +202,8 @@
 </template>
 
 <script>
+
+    import _ from 'lodash'
 
     export default {
         name: "HintTracker",
@@ -369,6 +374,11 @@
             };
         },
         computed: {
+            groupLocations(){
+                return _.groupBy(this.locations, (item) => {
+                    return item.name.charAt(0)
+                })
+            },
             sortedWayOfTheHero() {
                 let data = JSON.parse(JSON.stringify(this.selectedWayOfHero));
                 data.sort((a, b) => {

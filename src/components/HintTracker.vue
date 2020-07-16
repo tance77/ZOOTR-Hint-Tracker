@@ -1,11 +1,12 @@
 <template>
-    <div>
+    <div class="container mx-auto">
         <h2 class="px-4 mt-4 text-2xl font-bold leading-7 text-gray-100 sm:text-3xl sm:leading-9 sm:truncate">
             Ocarina of Time Hint Tracker
         </h2>
         <div class="mt-4">
             <div class="grid grid-cols-1 px-4 sm:gap-4 sm:grid-cols-5">
                 <div class="col-span-3">
+                    <!--Way of the Hero Things-->
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
                         <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
                             <div class="flex items-center">
@@ -13,13 +14,13 @@
                                     Way of the Hero / Foolish
                                 </h3>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <label class="flex items-center w-full justify-end">
+                                    <label class="flex items-center justify-end w-full">
                                         <input type="checkbox" class="text-2xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 text-gray-300 font-medium">Way of the Hero</span>
+                                        <span class="ml-2 font-medium text-gray-300">Way of the Hero</span>
                                     </label>
-                                    <label class="flex items-center w-full justify-end">
+                                    <label class="flex items-center justify-end w-full">
                                         <input type="checkbox" class="text-2xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 mr-2 text-gray-300 font-medium">Foolish</span>
+                                        <span class="ml-2 mr-2 font-medium text-gray-300">Foolish</span>
                                     </label>
                                 </div>
                             </div>
@@ -38,6 +39,38 @@
                             </div>
                         </div>
                     </div>
+                    <ul class="grid grid-cols-1 gap-6 mt-2 sm:grid-cols-2 lg:grid-cols-3">
+                        <li v-for="location in miscLocations" :key="location.id" class="col-span-1 bg-gray-800 rounded-lg shadow">
+                            <div class="flex items-center justify-between w-full p-6 space-x-6">
+                                <div class="flex-1 truncate">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-sm font-medium leading-5 text-gray-200 truncate">
+                                            {{ location.name }}
+                                        </h3>
+                                    </div>
+                                    <label class="mt-1 text-gray-300 text-sm leading-5 block">Rewards</label>
+                                    <input v-model="miscLocations[location.id-1].notes" type="text" class="mt-1 w-full text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
+                                </div>
+                                <!--                                <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt="">-->
+                            </div>
+                            <div class="border-t border-gray-700">
+                                <div class="flex -mt-px">
+                                    <div class="flex flex-1 w-0 border-r border-gray-700 group">
+                                        <a href="#" :class="{'text-red-500' : miscLocations[location.id-1].dead }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-bl-lg group-hover:text-red-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleDead(location)">
+                                            <svg class="w-5 h-5 text-gray-400 group-hover:text-red-500" fill="currentColor" :class="{'text-red-500' : miscLocations[location.id-1].dead }" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
+                                            <span class="ml-3">Dead</span>
+                                        </a>
+                                    </div>
+                                    <div class="flex flex-1 w-0 -ml-px group">
+                                        <a href="#" :class="{'text-green-500' : miscLocations[location.id-1].required }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-br-lg group-hover:text-green-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleRequired(location)">
+                                            <svg class="w-5 h-5 text-gray-400 group-hover:text-green-500" :class="{'text-green-500' : miscLocations[location.id-1].required }" viewBox="0 0 20 20" fill="currentColor"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+                                            <span class="ml-3">Required</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-span-2 mt-2 sm:mt-0">
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
@@ -77,58 +110,6 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
-                        <table class="w-full">
-                            <thead>
-                                <tr>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Hints
-                                    </th>
-                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700 lg:table-cell">
-                                        Dead
-                                    </th>
-                                    <th class="hidden px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700 lg:table-cell">
-                                        Required
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Notes
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="location in miscLocations" :key="location.id">
-                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-100 whitespace-no-wrap">
-                                        {{ location.name }}
-                                        <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
-                                            <span class="font-normal text-gray-300">Dead</span>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-lg text-red-800 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
-                                        </label>
-
-                                        <label class="flex grid items-center grid-cols-2 gap-6 my-2 lg:hidden">
-                                            <span class="font-normal text-gray-300">Required</span>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-lg text-green-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleRequired(location)">
-                                        </label>
-                                    </td>
-                                    <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
-                                        <label>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-xl text-red-800 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
-                                        </label>
-                                    </td>
-                                    <td class="hidden px-6 py-4 text-sm font-medium leading-5 text-center text-gray-900 whitespace-no-wrap lg:table-cell">
-                                        <label>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-xl text-green-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleRequired(location)">
-                                        </label>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
-                                        <label>
-                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
 
                     <div class="block mt-4 mb-2 text-center sm:hidden">
@@ -437,22 +418,22 @@
 
         },
         methods: {
-            toggleWoth(location, flag){
-                if(flag === true){
+            toggleWoth(location, flag) {
+                if (flag === true) {
                     //woth true remove it from foolish
-                    this.selectedFoolish = this.selectedFoolish.filter(foolishLocation=>{
+                    this.selectedFoolish = this.selectedFoolish.filter(foolishLocation => {
                         if (foolishLocation.id !== location.id) {
                             return foolishLocation;
                         }
-                    })
+                    });
                 }
-                if(flag === false){
+                if (flag === false) {
                     //foolish remove it from woth
                     this.selectedWayOfHero = this.selectedWayOfHero.filter(wothLocation => {
-                        if(wothLocation.id !== location.id){
+                        if (wothLocation.id !== location.id) {
                             return wothLocation;
                         }
-                    })
+                    });
                 }
             },
             toggleDead(location) {

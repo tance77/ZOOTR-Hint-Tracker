@@ -56,16 +56,16 @@
                             <div class="border-t border-gray-700">
                                 <div class="flex -mt-px">
                                     <div class="flex flex-1 w-0 border-r border-gray-700 group">
-                                        <a href="#" :class="{'text-red-500' : miscLocations[location.id-1].dead }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-bl-lg group-hover:text-red-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleDead(location)">
+                                        <button :class="{'text-red-500' : miscLocations[location.id-1].dead }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-bl-lg group-hover:text-red-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleDead(location)">
                                             <svg class="w-5 h-5 text-gray-400 group-hover:text-red-500" fill="currentColor" :class="{'text-red-500' : miscLocations[location.id-1].dead }" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
                                             <span class="ml-3">Dead</span>
-                                        </a>
+                                        </button>
                                     </div>
                                     <div class="flex flex-1 w-0 -ml-px group">
-                                        <a href="#" :class="{'text-green-500' : miscLocations[location.id-1].required }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-br-lg group-hover:text-green-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleRequired(location)">
+                                        <button :class="{'text-green-500' : miscLocations[location.id-1].required }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-br-lg group-hover:text-green-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleRequired(location)">
                                             <svg class="w-5 h-5 text-gray-400 group-hover:text-green-500" :class="{'text-green-500' : miscLocations[location.id-1].required }" viewBox="0 0 20 20" fill="currentColor"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
                                             <span class="ml-3">Required</span>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -39,42 +39,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
+                    <div class="p-4 mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
                         <table class="w-full">
                             <thead>
-                                <tr>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                                <tr class="mb-1">
+                                    <th colspan="3" class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
                                         Hints
                                     </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Dead
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Required
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Notes
-                                    </th>
+                                    <th class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">Rewards</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="location in miscLocations" :key="location.id">
-                                    <td class="px-4 text-xs leading-5 text-gray-100 whitespace-no-wrap">
+                                    <td class="text-xs text-gray-100 whitespace-no-wrap">
                                         {{ location.name }}
                                     </td>
-                                    <td class="px-4 text-xs leading-5 text-center text-gray-900 whitespace-no-wrap">
+                                    <td class="text-xs text-center text-gray-900 whitespace-no-wrap">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-base text-red-800 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-base text-red-800 bg-gray-900 border-gray-700 border-red-600 form-checkbox" @click="toggleDead(location)">
                                         </label>
                                     </td>
-                                    <td class="px-4 text-xs leading-5 text-center text-gray-900 whitespace-no-wrap">
+                                    <td class="text-xs text-center text-gray-900 whitespace-no-wrap">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-base text-green-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleRequired(location)">
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-base text-green-600 bg-gray-900 border-green-600 form-checkbox" @click="toggleRequired(location)">
                                         </label>
                                     </td>
-                                    <td class="px-4 text-xs leading-5 text-gray-900 whitespace-no-wrap">
+                                    <td class="text-xs text-gray-900 whitespace-no-wrap">
                                         <label>
-                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
+                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="my-1 text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
                                         </label>
                                     </td>
                                 </tr>
@@ -102,18 +94,18 @@
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
                                         <input
                                             v-for="aOption in selectedWayOfHero" v-if="option.id === aOption.id" :key="aOption.id" v-model="aOption.reward" type="text"
-                                            class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm text-xs focus:outline-none focus:shadow-none"
+                                            class="w-full mt-2 text-xs text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none"
                                         >
                                     </label>
                                 </label>
                             </div>
                             <div class="grid gap-2 mt-4 gird-cols-1 lg:grid-cols-2">
-                                <label class="col-span-1">
+                                <div class="col-span-1 overflow-auto" style="min-height: 150px; max-height: 150px;">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Foolish (3)</span>
                                     <label v-for="option in sortedFoolish" :key="option.id">
                                         <input type="text" class="w-full mt-2 text-xs bg-red-900 border-red-900 form-input form-input-sm text-red-50" :value="option.name" disabled>
                                     </label>
-                                </label>
+                                </div>
                                 <label class="col-span-1">
                                     <span class="block text-sm font-medium leading-5 text-gray-300">Extra Notes</span>
                                     <textarea v-model="extraNotes" class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 resize-none form-textarea focus:outline-none focus:shadow-none" rows="8"/>
@@ -207,7 +199,7 @@
                     {id: 4, dead: false, required: false, notes: null, name: "40 Skulltulas"},
                     {id: 5, dead: false, required: false, notes: null, name: "50 Skulltulas"},
                     {id: 6, dead: false, required: false, notes: null, name: "Biggoron Sword"},
-                    {id: 7, dead: false, required: false, notes: null, name: "Frog a Ocarina"},
+                    {id: 7, dead: false, required: false, notes: null, name: "Frog Ocarina"},
                     {id: 8, dead: false, required: false, notes: null, name: "Skull Mask"},
                     {id: 9, dead: false, required: false, notes: null, name: "Ocarina of Time"},
                 ],
@@ -218,7 +210,7 @@
                     {id: 4, dead: false, required: false, notes: null, name: "40 Skulltulas"},
                     {id: 5, dead: false, required: false, notes: null, name: "50 Skulltulas"},
                     {id: 6, dead: false, required: false, notes: null, name: "Biggoron Sword"},
-                    {id: 7, dead: false, required: false, notes: null, name: "Frog a Ocarina"},
+                    {id: 7, dead: false, required: false, notes: null, name: "Frog Ocarina"},
                     {id: 8, dead: false, required: false, notes: null, name: "Skull Mask"},
                     {id: 9, dead: false, required: false, notes: null, name: "Ocarina of Time"},
                 ],

@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto">
+    <div>
         <h2 class="px-4 mt-4 text-2xl font-bold leading-7 text-gray-100 sm:text-3xl sm:leading-9 sm:truncate">
             Ocarina of Time Hint Tracker
         </h2>
@@ -10,67 +10,77 @@
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
                         <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
                             <div class="flex items-center">
-                                <h3 class="flex-1 text-lg font-medium leading-6 text-gray-100">
+                                <h3 class="flex-1 text-sm font-medium leading-6 text-gray-100">
                                     Way of the Hero / Foolish
                                 </h3>
                                 <div class="grid grid-cols-2 gap-2">
                                     <label class="flex items-center justify-end w-full">
-                                        <input type="checkbox" class="text-2xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 font-medium text-gray-300">Way of the Hero</span>
+                                        <input type="checkbox" class="text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
+                                        <span class="ml-2 font-medium text-gray-300">WOTH</span>
                                     </label>
                                     <label class="flex items-center justify-end w-full">
-                                        <input type="checkbox" class="text-2xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
+                                        <input type="checkbox" class="text-red-800 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
                                         <span class="ml-2 mr-2 font-medium text-gray-300">Foolish</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-1 px-4 py-5 lg:grid-cols-3 sm:p-6">
+                        <div class="grid grid-cols-2 px-4 py-5 lg:grid-cols-3 sm:p-6">
                             <div v-for="location in locations" :key="location.id" class="flex items-center">
                                 <div class="grid grid-cols-2 gap-2">
                                     <label>
-                                        <input v-model="selectedWayOfHero" type="checkbox" class="text-xl text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" :value="location" @click="toggleWoth(location, true)">
+                                        <input v-model="selectedWayOfHero" type="checkbox" class="text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" :value="location" @click="toggleWoth(location, true)">
                                     </label>
                                     <label>
-                                        <input v-model="selectedFoolish" type="checkbox" class="text-xl text-red-800 transition duration-150 ease-in-out bg-gray-900 border-red-600 form-checkbox" :value="location" @click="toggleWoth(location, false)">
+                                        <input v-model="selectedFoolish" type="checkbox" class="text-red-800 transition duration-150 ease-in-out bg-gray-900 border-red-600 form-checkbox" :value="location" @click="toggleWoth(location, false)">
                                     </label>
                                 </div>
                                 <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
                             </div>
                         </div>
                     </div>
-                    <ul class="grid grid-cols-1 gap-6 mt-2 sm:grid-cols-2 lg:grid-cols-3">
-                        <li v-for="location in miscLocations" :key="location.id" class="col-span-1 bg-gray-800 rounded-lg shadow">
-                            <div class="flex items-center justify-between w-full p-6 space-x-6">
-                                <div class="flex-1 truncate">
-                                    <div class="flex items-center space-x-3">
-                                        <h3 class="text-sm font-medium leading-5 text-gray-200 truncate">
-                                            {{ location.name }}
-                                        </h3>
-                                    </div>
-                                    <label class="mt-1 text-gray-300 text-sm leading-5 block">Rewards</label>
-                                    <input v-model="miscLocations[location.id-1].notes" type="text" class="mt-1 w-full text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
-                                </div>
-                                <!--                                <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt="">-->
-                            </div>
-                            <div class="border-t border-gray-700">
-                                <div class="flex -mt-px">
-                                    <div class="flex flex-1 w-0 border-r border-gray-700 group">
-                                        <button :class="{'text-red-500' : miscLocations[location.id-1].dead }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-bl-lg group-hover:text-red-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleDead(location)">
-                                            <svg class="w-5 h-5 text-gray-400 group-hover:text-red-500" fill="currentColor" :class="{'text-red-500' : miscLocations[location.id-1].dead }" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
-                                            <span class="ml-3">Dead</span>
-                                        </button>
-                                    </div>
-                                    <div class="flex flex-1 w-0 -ml-px group">
-                                        <button :class="{'text-green-500' : miscLocations[location.id-1].required }" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out border border-transparent rounded-br-lg group-hover:text-green-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" @click="toggleRequired(location)">
-                                            <svg class="w-5 h-5 text-gray-400 group-hover:text-green-500" :class="{'text-green-500' : miscLocations[location.id-1].required }" viewBox="0 0 20 20" fill="currentColor"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
-                                            <span class="ml-3">Required</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                                        Hints
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                                        Dead
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                                        Required
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                                        Notes
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="location in miscLocations" :key="location.id">
+                                    <td class="px-4 text-xs leading-5 text-gray-100 whitespace-no-wrap">
+                                        {{ location.name }}
+                                    </td>
+                                    <td class="px-4 text-xs leading-5 text-center text-gray-900 whitespace-no-wrap">
+                                        <label>
+                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-base text-red-800 bg-gray-900 border-gray-700 form-checkbox" @click="toggleDead(location)">
+                                        </label>
+                                    </td>
+                                    <td class="px-4 text-xs leading-5 text-center text-gray-900 whitespace-no-wrap">
+                                        <label>
+                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-base text-green-600 bg-gray-900 border-gray-700 form-checkbox" @click="toggleRequired(location)">
+                                        </label>
+                                    </td>
+                                    <td class="px-4 text-xs leading-5 text-gray-900 whitespace-no-wrap">
+                                        <label>
+                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-span-2 mt-2 sm:mt-0">
                     <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
@@ -80,11 +90,11 @@
                                     Reset
                                 </button>
                             </div>
-                            <div class="grid gap-2 mt-2 gird-cols-1 lg:grid-cols-2">
+                            <div class="grid gap-2 mt-2 overflow-auto gird-cols-1 md:grid-cols-2" style="min-height: 250px; max-height: 250px;">
                                 <div class="col-span-1">
-                                    <span class="block text-sm font-medium leading-5 text-gray-300">Way of The Hero Locations</span>
+                                    <span class="block text-sm font-medium leading-5 text-gray-300">WOTH (5)</span>
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input type="text" class="w-full mt-2 bg-green-900 border-green-900 form-input text-green-50" :value="option.name" disabled>
+                                        <input type="text" class="w-full mt-2 text-xs bg-green-900 border-green-900 form-input form-input-sm text-green-50" :value="option.name" disabled readonly>
                                     </label>
                                 </div>
                                 <label class="col-span-1">
@@ -92,16 +102,16 @@
                                     <label v-for="option in sortedWayOfTheHero" :key="option.id">
                                         <input
                                             v-for="aOption in selectedWayOfHero" v-if="option.id === aOption.id" :key="aOption.id" v-model="aOption.reward" type="text"
-                                            class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 form-input focus:outline-none focus:shadow-none"
+                                            class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm text-xs focus:outline-none focus:shadow-none"
                                         >
                                     </label>
                                 </label>
                             </div>
                             <div class="grid gap-2 mt-4 gird-cols-1 lg:grid-cols-2">
                                 <label class="col-span-1">
-                                    <span class="block text-sm font-medium leading-5 text-gray-300">Foolish Locations</span>
+                                    <span class="block text-sm font-medium leading-5 text-gray-300">Foolish (3)</span>
                                     <label v-for="option in sortedFoolish" :key="option.id">
-                                        <input type="text" class="w-full mt-2 bg-red-900 border-red-900 form-input text-red-50" :value="option.name" disabled>
+                                        <input type="text" class="w-full mt-2 text-xs bg-red-900 border-red-900 form-input form-input-sm text-red-50" :value="option.name" disabled>
                                     </label>
                                 </label>
                                 <label class="col-span-1">

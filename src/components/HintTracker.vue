@@ -46,7 +46,9 @@
                                     <th colspan="3" class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
                                         Hints
                                     </th>
-                                    <th class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">Rewards</th>
+                                    <th class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                                        Rewards
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

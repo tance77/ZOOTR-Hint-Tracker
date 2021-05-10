@@ -71,12 +71,12 @@
                             </div>
                             <div class="flex items-center space-x-2">
                                 <input
-                                    v-model="miscLocations[location.id-1].dead" type="checkbox" class="bg-transparent rounded border-purple-500 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-offset-0 focus:ring-purple-200 focus:ring-opacity-50"
-                                    @click="toggleDead(location)"
-                                >
-                                <input
                                     v-model="miscLocations[location.id-1].required" type="checkbox" class="bg-transparent rounded border-teal-500 text-teal-600 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-0 focus:ring-teal-200 focus:ring-opacity-50"
                                     @click="toggleRequired(location)"
+                                >
+                                <input
+                                    v-model="miscLocations[location.id-1].dead" type="checkbox" class="bg-transparent rounded border-purple-500 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-offset-0 focus:ring-purple-200 focus:ring-opacity-50"
+                                    @click="toggleDead(location)"
                                 >
                             </div>
                         </div>

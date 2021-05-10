@@ -1,123 +1,128 @@
 <template>
-    <div>
-        <h2 class="px-4 mt-4 text-2xl font-bold leading-7 text-gray-100 sm:text-3xl sm:leading-9 sm:truncate">
-            Ocarina of Time Hint Tracker
-        </h2>
+    <div class="container mx-auto">
+        <div class="flex items-center space-x-4 p-4">
+            <h2 class="text-2xl font-bold leading-7 text-gray-100 sm:text-3xl sm:leading-9 sm:truncate">
+                Ocarina of Time Hint Tracker
+            </h2>
+            <div class="text-right">
+                <button
+                    type="button"
+                    class="items-center w-full px-4 py-2 text-sm font-medium leading-5 text-center text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md lg:inline-flex lg:w-auto lg:text-left hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700"
+                    @click.stop.prevent="resetModal = true"
+                >
+                    Reset
+                </button>
+            </div>
+        </div>
         <div class="mt-4">
-            <div class="grid grid-cols-1 px-4 sm:gap-4 sm:grid-cols-5">
-                <div class="col-span-3">
-                    <!--Way of the Hero Things-->
-                    <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
-                        <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
-                            <div class="flex items-center">
-                                <h3 class="flex-1 text-sm font-medium leading-6 text-gray-100">
-                                    Way of the Hero / Foolish
-                                </h3>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <label class="flex items-center justify-end w-full">
-                                        <input type="checkbox" class="text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 font-medium text-gray-300">WOTH</span>
-                                    </label>
-                                    <label class="flex items-center justify-end w-full">
-                                        <input type="checkbox" class="text-red-800 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" disabled checked>
-                                        <span class="ml-2 mr-2 font-medium text-gray-300">Foolish</span>
-                                    </label>
-                                </div>
-                            </div>
+            <!--Way of the Hero Things-->
+            <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
+                <div class="px-4 py-5 border-b border-gray-700 sm:px-6">
+                    <div class="flex items-center">
+                        <h3 class="flex-1 font-medium leading-6 text-gray-100">
+                            Way of the Hero / Foolish
+                        </h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center justify-end w-full">
+                                <input type="checkbox" class="bg-transparent rounded border-teal-500 text-teal-600 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-0 focus:ring-teal-200 focus:ring-opacity-50" disabled checked>
+                                <span class="ml-2 font-medium text-gray-300">WOTH</span>
+                            </label>
+                            <label class="flex items-center justify-end w-full">
+                                <input type="checkbox" class="bg-transparent rounded border-purple-500 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-offset-0 focus:ring-purple-200 focus:ring-opacity-50" disabled checked>
+                                <span class="ml-2 mr-2 font-medium text-gray-300">Foolish</span>
+                            </label>
                         </div>
-                        <div class="grid grid-cols-2 px-4 py-5 lg:grid-cols-3 sm:p-6">
-                            <div v-for="location in locations" :key="location.id" class="flex items-center">
-                                <div class="grid grid-cols-2 gap-2">
-                                    <label>
-                                        <input v-model="selectedWayOfHero" type="checkbox" class="text-green-600 transition duration-150 ease-in-out bg-gray-900 border-green-600 form-checkbox" :value="location" @click="toggleWoth(location, true)">
-                                    </label>
-                                    <label>
-                                        <input v-model="selectedFoolish" type="checkbox" class="text-red-800 transition duration-150 ease-in-out bg-gray-900 border-red-600 form-checkbox" :value="location" @click="toggleWoth(location, false)">
-                                    </label>
-                                </div>
-                                <span class="ml-2 text-sm text-gray-300">{{ location.name }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="mb-1">
-                                    <th colspan="3" class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Hints
-                                    </th>
-                                    <th class="text-xs font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
-                                        Rewards
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="location in miscLocations" :key="location.id">
-                                    <td class="text-xs text-gray-100 whitespace-no-wrap">
-                                        {{ location.name }}
-                                    </td>
-                                    <td class="text-xs text-center text-gray-900 whitespace-no-wrap">
-                                        <label>
-                                            <input v-model="miscLocations[location.id-1].dead" type="checkbox" class="text-base text-red-800 bg-gray-900 border-gray-700 border-red-600 form-checkbox" @click="toggleDead(location)">
-                                        </label>
-                                    </td>
-                                    <td class="text-xs text-center text-gray-900 whitespace-no-wrap">
-                                        <label>
-                                            <input v-model="miscLocations[location.id-1].required" type="checkbox" class="text-base text-green-600 bg-gray-900 border-green-600 form-checkbox" @click="toggleRequired(location)">
-                                        </label>
-                                    </td>
-                                    <td class="text-xs text-gray-900 whitespace-no-wrap">
-                                        <label>
-                                            <input v-model="miscLocations[location.id-1].notes" type="text" class="my-1 text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
-                <div class="col-span-2 mt-2 sm:mt-0">
-                    <div class="overflow-hidden bg-gray-800 rounded-lg shadow">
-                        <div class="px-4 py-5 sm:p-6">
-                            <div class="text-right">
-                                <button type="button" class="items-center w-full px-4 py-2 text-sm font-medium leading-5 text-center text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md lg:inline-flex lg:w-auto lg:text-left hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700" @click.stop.prevent="resetModal = true">
-                                    Reset
-                                </button>
-                            </div>
-                            <div class="grid gap-2 mt-2 overflow-auto gird-cols-1 md:grid-cols-2" style="min-height: 250px; max-height: 250px;">
-                                <div class="col-span-1">
-                                    <span class="block text-sm font-medium leading-5 text-gray-300">WOTH (5)</span>
-                                    <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input type="text" class="w-full mt-2 text-xs bg-green-900 border-green-900 form-input form-input-sm text-green-50" :value="option.name" disabled readonly>
-                                    </label>
-                                </div>
-                                <label class="col-span-1">
-                                    <span class="block text-sm font-medium leading-5 text-gray-300">Rewards</span>
-                                    <label v-for="option in sortedWayOfTheHero" :key="option.id">
-                                        <input
-                                            v-for="aOption in selectedWayOfHero" v-if="option.id === aOption.id" :key="aOption.id" v-model="aOption.reward" type="text"
-                                            class="w-full mt-2 text-xs text-gray-300 bg-gray-900 border-gray-700 form-input form-input-sm focus:outline-none focus:shadow-none"
-                                        >
-                                    </label>
-                                </label>
-                            </div>
-                            <div class="grid gap-2 mt-4 gird-cols-1 lg:grid-cols-2">
-                                <div class="col-span-1 overflow-auto" style="min-height: 150px; max-height: 150px;">
-                                    <span class="block text-sm font-medium leading-5 text-gray-300">Foolish (3)</span>
-                                    <label v-for="option in sortedFoolish" :key="option.id">
-                                        <input type="text" class="w-full mt-2 text-xs bg-red-900 border-red-900 form-input form-input-sm text-red-50" :value="option.name" disabled>
-                                    </label>
-                                </div>
-                                <label class="col-span-1">
-                                    <span class="block text-sm font-medium leading-5 text-gray-300">Extra Notes</span>
-                                    <textarea v-model="extraNotes" class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 resize-none form-textarea focus:outline-none focus:shadow-none" rows="8"/>
-                                </label>
-                            </div>
+                <div class="grid grid-cols-2 px-4 py-5 lg:grid-cols-3 xl:grid-cols-5 sm:p-6">
+                    <div v-for="location in locations" :key="location.id" class="flex items-center">
+                        <div class="grid grid-cols-2 gap-2">
+                            <label>
+                                <input
+                                    v-model="selectedWayOfHero" type="checkbox" class="bg-transparent rounded border-teal-500 text-teal-600 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-0 focus:ring-teal-200 focus:ring-opacity-50" :value="location"
+                                    @click="toggleWoth(location, true)"
+                                >
+                            </label>
+                            <label>
+                                <input
+                                    v-model="selectedFoolish" type="checkbox" class="bg-transparent rounded border-purple-500 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-offset-0 focus:ring-purple-200 focus:ring-opacity-50" :value="location"
+                                    @click="toggleWoth(location, false)"
+                                >
+                            </label>
+                        </div>
+                        <span class="ml-2 text-gray-300">{{ location.name }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="p-4 mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
+                    <div class="hidden lg:grid grid-cols-2 border-b border-gray-800">
+                        <div class="text-xs pb-1 font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700 text-right mr-2">
+                            Hints
+                        </div>
+                        <div class="text-xs pb-1 font-medium leading-4 tracking-wider text-left text-gray-400 uppercase bg-gray-800 border-b border-gray-700">
+                            Rewards
                         </div>
                     </div>
-
+                    <div v-for="location in miscLocations" :key="location.id" class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="whitespace-no-wrap lg:flex items-center lg:space-x-4 lg:justify-end lg:mr-2">
+                            <div class="text-gray-100">
+                                {{ location.name }}
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input
+                                    v-model="miscLocations[location.id-1].dead" type="checkbox" class="bg-transparent rounded border-purple-500 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-offset-0 focus:ring-purple-200 focus:ring-opacity-50"
+                                    @click="toggleDead(location)"
+                                >
+                                <input
+                                    v-model="miscLocations[location.id-1].required" type="checkbox" class="bg-transparent rounded border-teal-500 text-teal-600 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-0 focus:ring-teal-200 focus:ring-opacity-50"
+                                    @click="toggleRequired(location)"
+                                >
+                            </div>
+                        </div>
+                        <div class="py-1">
+                            <input v-model="miscLocations[location.id-1].notes" type="text" class="w-full lg:w-auto py-1 text-gray-300 bg-gray-900 border-gray-700 rounded focus:outline-none focus:shadow-none">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 mt-4 mb-4 overflow-hidden bg-gray-800 rounded-lg shadow">
+                    <div class="px-4 py-5 sm:p-6">
+                        <div class="grid gap-2 mt-2 overflow-auto gird-cols-1 md:grid-cols-2" style="min-height: 250px; max-height: 250px;">
+                            <div class="col-span-1">
+                                <span class="block text-sm font-medium leading-5 text-gray-300">WOTH (5)</span>
+                                <label v-for="option in sortedWayOfTheHero" :key="option.id">
+                                    <input type="text" class="w-full mt-2 text-xs bg-teal-900 border-teal-900 rounded text-teal-50" :value="option.name" disabled readonly>
+                                </label>
+                            </div>
+                            <label class="col-span-1">
+                                <span class="block text-sm font-medium leading-5 text-gray-300">Rewards</span>
+                                <label v-for="option in sortedWayOfTheHero" :key="option.id">
+                                    <input
+                                        v-for="aOption in selectedWayOfHero" v-if="option.id === aOption.id" :key="aOption.id" v-model="aOption.reward" type="text"
+                                        class="w-full mt-2 text-xs text-gray-300 bg-gray-900 border-gray-700 rounded focus:outline-none focus:shadow-none"
+                                    >
+                                </label>
+                            </label>
+                        </div>
+                        <div class="grid gap-2 mt-4 gird-cols-1 lg:grid-cols-2">
+                            <div class="col-span-1 overflow-auto" style="min-height: 150px; max-height: 150px;">
+                                <span class="block text-sm font-medium leading-5 text-gray-300">Foolish (3)</span>
+                                <label v-for="option in sortedFoolish" :key="option.id">
+                                    <input type="text" class="w-full mt-2 text-xs bg-purple-900 border-purple-900 rounded text-purple-50" :value="option.name" disabled>
+                                </label>
+                            </div>
+                            <label class="col-span-1">
+                                <span class="block text-sm font-medium leading-5 text-gray-300">Extra Notes</span>
+                                <textarea v-model="extraNotes" class="w-full mt-2 text-gray-300 bg-gray-900 border-gray-700 resize-none form-textarea focus:outline-none focus:shadow-none" rows="8"/>
+                            </label>
+                        </div>
+                    </div>
                     <div class="block mt-4 mb-2 text-center sm:hidden">
-                        <button type="button" class="w-full px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700" @click.stop.prevent="resetModal = true">
+                        <button
+                            type="button"
+                            class="w-full px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-purple-600 border border-transparent rounded-md hover:bg-purple-500 focus:outline-none focus:border-purple-700 focus:shadow-outline-red active:bg-purple-700"
+                            @click.stop.prevent="resetModal = true"
+                        >
                             Reset
                         </button>
                     </div>
@@ -166,12 +171,20 @@
                         </div>
                         <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                                <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5" @click.stop.prevent="reset">
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+                                    @click.stop.prevent="reset"
+                                >
                                     Reset
                                 </button>
                             </span>
                             <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
-                                <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" @click="resetModal = false">
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+                                    @click="resetModal = false"
+                                >
                                     Cancel
                                 </button>
                             </span>

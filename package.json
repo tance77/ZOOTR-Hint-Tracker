@@ -17,11 +17,11 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-e2e-cypress": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-plugin-unit-mocha": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-unit-mocha": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/test-utils": "1.0.0-beta.29",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
@@ -33,7 +33,7 @@
     "node-sass": "^7.0.0",
     "postcss": "^8.2.10",
     "sass": "^1.18.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^13.2.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
     "vue-template-compiler": "^2.6.10"
   }
